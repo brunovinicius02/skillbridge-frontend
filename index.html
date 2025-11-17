@@ -1,6 +1,14 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
   <head>
+    <script>
+  try {
+    const saved = localStorage.getItem('theme'); // 'dark' | 'light'
+    const prefers = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = saved ? saved === 'dark' : prefers;
+    if (isDark) document.documentElement.classList.add('dark');
+  } catch (e) { /* ignore */ }
+    </script>
     <meta charset="UTF-8" />
    <link rel="icon" type="image/png" href="/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
