@@ -1,3 +1,4 @@
+// src/types.ts
 export type Curso = {
   id: number;
   titulo: string;
@@ -6,6 +7,10 @@ export type Curso = {
   nivel: "iniciante" | "intermediario" | "avancado";
   tags: string[];
   rating: number;
+
+  // 👇 novos campos para sua Trilha
+  descricao: string;
+  youtubeUrl: string;
 };
 
 export type Usuario = {

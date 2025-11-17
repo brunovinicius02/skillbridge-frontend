@@ -49,6 +49,11 @@ const depoimentos = [
 
 export function Home() {
   const [wIndex, setWIndex] = useState(0);
+  const [slide, setSlide] = useState(0);
+  const total = destaques.length;
+
+  // 👇 Nome vindo do login salvo no localStorage
+  const [nomeUsuario, setNomeUsuario] = useState<string | null>(null);
 
   useEffect(() => {
     const id = setInterval(
@@ -60,9 +65,6 @@ export function Home() {
 
   const palavraAtual = useMemo(() => rotatingWords[wIndex], [wIndex]);
 
-  const [slide, setSlide] = useState(0);
-  const total = destaques.length;
-
   useEffect(() => {
     const id = setInterval(
       () => setSlide((s) => (s + 1) % total),
@@ -70,6 +72,18 @@ export function Home() {
     );
     return () => clearInterval(id);
   }, [total]);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("skillbridge_user");
+      if (raw) {
+        const user = JSON.parse(raw);
+        if (user?.nome) setNomeUsuario(user.nome as string);
+      }
+    } catch {
+      setNomeUsuario(null);
+    }
+  }, []);
 
   return (
     <div className="relative bg-slate-50/40 overflow-x-hidden">
@@ -86,6 +100,17 @@ export function Home() {
           <div className="grid items-center gap-12 md:grid-cols-2">
             {/* Texto principal */}
             <div>
+              {/* 👇 Saudação personalizada */}
+              <p
+                className="mb-2 text-xs md:text-sm font-medium text-sky-700"
+                style={{
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Olá, {nomeUsuario ?? "bem-vinda"} 👋
+              </p>
+
               <p
                 className="mb-4 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium shadow-sm bg-white/80 border-sky-100"
                 style={{ color: "var(--sb-ink)" }}
@@ -167,7 +192,9 @@ export function Home() {
               <div className="card overflow-hidden rounded-3xl border border-slate-200/80 bg-white/90 shadow-xl backdrop-blur">
                 <div
                   className="flex transition-transform duration-700 ease-out"
-                  style={{ transform: `translateX(-${slide * 100}%)` }}
+                  style={{
+                    transform: `translateX(-${slide * 100}%)`,
+                  }}
                 >
                   {destaques.map((d, i) => (
                     <article

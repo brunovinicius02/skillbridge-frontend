@@ -134,12 +134,6 @@ export function Catalogo() {
                 </span>{" "}
                 curso(s) {quantidadeTexto}.
               </p>
-
-              {mostrarFavoritos && (
-                <p className="text-[12px] text-rose-500">
-                  Você está vendo apenas cursos marcados como favoritos.
-                </p>
-              )}
             </div>
 
             <div
