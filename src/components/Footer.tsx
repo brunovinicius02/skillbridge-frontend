@@ -44,7 +44,7 @@ export default function Footer() {
             className="transition hover:opacity-70"
             style={{ color: "var(--sb-primary)" }}
           >
-            Privacidade
+            Integrantes 
           </a>
         </nav>
 

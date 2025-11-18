@@ -338,6 +338,7 @@ export const usuarioDemo: Usuario = {
   competencias: ["html", "css", "figma", "python-basico"],
   interesses: ["dados", "ia", "ux"],
   disponibilidadeSemanal: 6,
+  fotoUrl: undefined
 };
 
 export function recomendarCursos(

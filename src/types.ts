@@ -14,6 +14,7 @@ export type Curso = {
 };
 
 export type Usuario = {
+  fotoUrl: string | undefined;
   id: number;
   nome: string;
   competencias: string[];

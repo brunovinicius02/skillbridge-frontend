@@ -388,7 +388,7 @@ export function Home() {
                   color: "#fff",
                 }}
               >
-                Conhecer minha trilha
+                Conhecer minhas recomendações
               </Link>
             </div>
           </div>

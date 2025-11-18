@@ -1,12 +1,12 @@
 // src/pages/Login.tsx
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, type ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
 type PerfilForm = {
   nome: string;
   email: string;
   senha: string;
-  fotoUrl: string;
+  fotoUrl: string; // agora guarda o base64 da imagem
   nivelAtual: "iniciante" | "intermediario" | "avancado" | "";
   interesses: string[];
   disponibilidadeSemanal: string; // guardo como string no form, converto depois
@@ -47,6 +47,22 @@ export function Login() {
     });
   };
 
+  // ⬇️ novo: trata upload de imagem local e salva em base64 no estado
+  const handleFotoChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setForm((prev) => ({
+        ...prev,
+        fotoUrl: (reader.result as string) || "",
+      }));
+    };
+
+    reader.readAsDataURL(file); // converte para base64
+  };
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
@@ -55,7 +71,7 @@ export function Login() {
       id: 1,
       nome: form.nome || "Aluno SkillBridge",
       email: form.email,
-      fotoUrl: form.fotoUrl || "",
+      fotoUrl: form.fotoUrl || "", // aqui já é base64
       nivelAtual: form.nivelAtual || "iniciante",
       interesses: form.interesses,
       competencias: [], // pode preencher depois com algo do backend
@@ -139,18 +155,31 @@ export function Login() {
                   required
                 />
               </div>
+
               <div>
                 <label className="block text-xs font-medium text-slate-700 mb-1">
-                  URL da foto de perfil (opcional)
+                  Foto de perfil (upload opcional)
                 </label>
                 <input
-                  className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/70 focus:border-sky-500"
-                  placeholder="https://imagem.com/foto.jpg"
-                  value={form.fotoUrl}
-                  onChange={(e) =>
-                    setForm((prev) => ({ ...prev, fotoUrl: e.target.value }))
-                  }
+                  type="file"
+                  accept="image/*"
+                  className="w-full rounded-xl border border-slate-200 px-3 py-1.5 text-xs file:mr-3 file:rounded-lg file:border-0 file:bg-sky-600 file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white hover:file:bg-sky-700"
+                  onChange={handleFotoChange}
                 />
+                {form.fotoUrl && (
+                  <div className="mt-3 flex items-center gap-2">
+                    <div className="h-10 w-10 rounded-full overflow-hidden border border-slate-200">
+                      <img
+                        src={form.fotoUrl}
+                        alt="Prévia da foto"
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <span className="text-[11px] text-slate-500">
+                      Prévia da sua foto de perfil
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
 
