@@ -1,63 +1,27 @@
 export default function Footer() {
   return (
     <footer
-      className="mt-16"
+      className="mt-20"
       style={{
         background: "var(--sb-primary-20)",
-        borderTop: "1px solid color-mix(in oklab, var(--sb-primary), #000 15%)",
+        borderTop: "1px solid color-mix(in oklab, var(--sb-primary), #000 12%)",
       }}
     >
-      <div className="mx-auto max-w-7xl px-4 py-10 text-center text-sm">
-        {/* Texto principal */}
+      <div className="mx-auto max-w-7xl px-4 py-4 flex flex-col items-center gap-4 text-center">
+        
+        {/* Marca */}
         <p
-          className="mb-4 font-medium"
+          className="text-sm font-medium tracking-wide"
           style={{ color: "var(--sb-ink)" }}
         >
-          © {new Date().getFullYear()} <strong>SkillBridge</strong> — Seu próximo passo, guiado por IA.
+          © {new Date().getFullYear()}{" "}
+          <span className="font-semibold" style={{ color: "var(--sb-primary)" }}>
+            SkillBridge
+          </span>{" "}
+          — Seu próximo passo, guiado por IA.
         </p>
-
-        {/* Navegação */}
-        <nav className="flex flex-wrap justify-center gap-6 mt-3">
-          <a
-            href="#"
-            className="transition hover:opacity-70"
-            style={{ color: "var(--sb-primary)" }}
-          >
-            Sobre
-          </a>
-          <a
-            href="#"
-            className="transition hover:opacity-70"
-            style={{ color: "var(--sb-primary)" }}
-          >
-            FAQ
-          </a>
-          <a
-            href="#"
-            className="transition hover:opacity-70"
-            style={{ color: "var(--sb-primary)" }}
-          >
-            Contato
-          </a>
-          <a
-            href="#"
-            className="transition hover:opacity-70"
-            style={{ color: "var(--sb-primary)" }}
-          >
-            Integrantes 
-          </a>
-        </nav>
-
-        {/* Linha suave decorativa */}
-        <div
-          className="mx-auto mt-8 h-px w-40 opacity-40"
-          style={{
-            background:
-              "linear-gradient(90deg, transparent, var(--sb-primary), transparent)",
-          }}
-        />
+        
       </div>
     </footer>
   );
 }
-

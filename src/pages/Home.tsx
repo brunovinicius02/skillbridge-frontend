@@ -465,43 +465,6 @@ export function Home() {
           </div>
         </div>
       </section>
-
-      {/* CTA FINAL */}
-      <section className="mx-auto max-w-7xl px-4 py-16">
-        <div
-          className="rounded-3xl px-6 py-10 text-center text-white md:px-10 md:py-12 shadow-xl"
-          style={{
-            background:
-              "linear-gradient(90deg, var(--sb-primary), var(--sb-secondary))",
-          }}
-        >
-          <h3 className="text-2xl md:text-3xl font-bold">
-            Pronta para acelerar sua carreira?
-          </h3>
-          <p className="mt-2 text-sm md:text-base opacity-90">
-            Gere seu plano personalizado em minutos com a SkillBridge e dê o
-            próximo passo com confiança.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Link
-              to="/recomendacoes"
-              className="rounded-xl px-5 py-3 text-sm md:text-base font-semibold shadow-md hover:shadow-lg transition hover:-translate-y-px"
-              style={{ background: "#fff", color: "var(--sb-primary)" }}
-            >
-              Criar meu plano agora
-            </Link>
-            <Link
-              to="/login"
-              className="rounded-xl px-5 py-3 text-sm md:text-base font-medium border-white/60 bg-white/5 hover:bg-white/10 transition"
-              style={{
-                border: "1px solid rgba(255,255,255,.7)",
-              }}
-            >
-              Já tenho conta
-            </Link>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

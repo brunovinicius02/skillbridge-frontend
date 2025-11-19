@@ -1,7 +1,9 @@
 // src/components/CourseCard.tsx
+import { useState } from "react";
 import type { Curso } from "../types";
 import { useTrilha } from "../hooks/useTrilha";
 import { useFavoritos } from "../hooks/useFavoritos";
+
 
 type Props = {
   c: Curso;
@@ -25,7 +27,7 @@ export default function CourseCard({ c }: Props) {
         rounded-2xl border border-slate-100
         p-4 bg-white
         shadow-sm hover:shadow-md hover:-translate-y-1
-        transition
+        transition group
       "
     >
       {/* Coração de favoritos */}
@@ -80,7 +82,44 @@ export default function CourseCard({ c }: Props) {
       </div>
 
       {/* Ações */}
-      <div className="mt-4 flex gap-2">
+      <div className="mt-4 flex gap-2 relative">
+
+        {/* BOTÃO */}
+        <button
+          type="button"
+          className="
+            flex-1 rounded-xl border border-slate-200
+            px-3 py-2 text-xs md:text-sm font-medium relative
+            text-slate-700 hover:bg-slate-50 transition
+          "
+        >
+          Ver detalhes
+        </button>
+
+        {/* TOOLTIP */}
+        <div
+          className="
+            absolute left-1/2 bottom-[52px]
+            -translate-x-1/2 -translate-y-2
+            hidden group-hover:block
+            w-64 z-30
+            rounded-lg border border-slate-700
+            bg-slate-900/95 px-3 py-2
+            text-[11px] leading-snug shadow-xl text-slate-100
+          "
+        >
+          <p className="font-semibold mb-1 text-sky-300">{c.titulo}</p>
+
+          <p>
+            {c.descricao
+              ? c.descricao.length > 150
+                ? c.descricao.slice(0, 150) + "..."
+                : c.descricao
+              : "Descrição não disponível."}
+          </p>
+        </div>
+
+        {/* BOTÃO ADICIONAR */}
         <button
           type="button"
           onClick={handleAdicionarTrilha}
@@ -93,16 +132,6 @@ export default function CourseCard({ c }: Props) {
           Adicionar à trilha
         </button>
 
-        <button
-          type="button"
-          className="
-            flex-1 rounded-xl border border-slate-200
-            px-3 py-2 text-xs md:text-sm font-medium
-            text-slate-700 hover:bg-slate-50 transition
-          "
-        >
-          Ver detalhes
-        </button>
       </div>
     </div>
   );
