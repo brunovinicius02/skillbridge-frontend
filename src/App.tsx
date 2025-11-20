@@ -1,10 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-// COMPONENTES
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
-// PÁGINAS
 import { Home } from "./pages/Home";
 import { Catalogo } from "./pages/Catalogo";
 import { Login } from "./pages/Login";
@@ -13,31 +10,36 @@ import { Recomendacoes } from "./pages/Recomendacoes";
 import { Trilha } from "./pages/Trilha";
 import { Integrantes } from "./pages/Integrantes";
 import { FAQ } from "./pages/FAQ";
-import { Contato } from "./pages/Contato";
+import {Contato} from "./pages/Contato";
+
+import { FavoritosProvider } from "./hooks/useFavoritos";
+import { TrilhaProvider } from "./hooks/useTrilha";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <div className="flex min-h-screen flex-col">
-        
-        <Navbar />
-
-        <main className="flex-1">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/catalogo" element={<Catalogo />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/perfil" element={<Perfil />} />
-            <Route path="/recomendacoes" element={<Recomendacoes />} />
-            <Route path="/trilha" element={<Trilha />} />
-            <Route path="/integrantes" element={<Integrantes />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/contato" element={<Contato />} />
-          </Routes>
-        </main>
-
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <TrilhaProvider>
+      <FavoritosProvider>
+        <BrowserRouter>
+          <div className="flex min-h-screen flex-col">
+            <Navbar />
+            <main className="flex-1">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/catalogo" element={<Catalogo />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/perfil" element={<Perfil />} />
+                <Route path="/recomendacoes" element={<Recomendacoes />} />
+                <Route path="/trilha" element={<Trilha />} />
+                <Route path="/integrantes" element={<Integrantes />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/contato" element={<Contato />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </main>
+            <Footer />
+          </div>
+        </BrowserRouter>
+      </FavoritosProvider>
+    </TrilhaProvider>
   );
 }

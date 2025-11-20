@@ -114,16 +114,17 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* NAV DESKTOP */}
+        {/* NAV DESKTOP — PERFIL NO FINAL */}
         <nav className="hidden md:flex items-center gap-1 rounded-full bg-slate-50 px-3 py-1.5 border border-slate-200">
           <NavItem to="/">Início</NavItem>
           <NavItem to="/catalogo">Catálogo</NavItem>
           <NavItem to="/recomendacoes">Recomendações</NavItem>
           <NavItem to="/trilha">Minha Trilha</NavItem>
-          <NavItem to="/perfil">Perfil</NavItem>
           <NavItem to="/faq">FAQ</NavItem>
           <NavItem to="/contato">Contato</NavItem>
           <NavItem to="/integrantes">Integrantes</NavItem>
+          {/* PERFIL AGORA É O ÚLTIMO */}
+          <NavItem to="/perfil">Perfil</NavItem>
         </nav>
 
         {/* LOGIN DESKTOP */}
@@ -147,9 +148,10 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* MENU MOBILE – TELA INTEIRA BRANCA */}
+      {/* MENU MOBILE — PERFIL NO FINAL */}
       {open && (
         <div className="fixed inset-0 z-50 bg-white flex flex-col md:hidden">
+          
           {/* topo do menu mobile */}
           <div className="px-4 pt-4 pb-3 flex items-center justify-between border-b border-slate-200">
             <div className="flex items-center gap-2">
@@ -174,62 +176,16 @@ export default function Navbar() {
 
           {/* LINKS MOBILE */}
           <nav className="px-4 py-4 flex flex-col gap-2 text-sm">
-            <Link
-              to="/"
-              onClick={() => setOpen(false)}
-              className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium"
-            >
-              Início
-            </Link>
-            <Link
-              to="/catalogo"
-              onClick={() => setOpen(false)}
-              className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium"
-            >
-              Catálogo
-            </Link>
-            <Link
-              to="/recomendacoes"
-              onClick={() => setOpen(false)}
-              className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium"
-            >
-              Recomendações
-            </Link>
-            <Link
-              to="/trilha"
-              onClick={() => setOpen(false)}
-              className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium"
-            >
-              Minha Trilha
-            </Link>
-            <Link
-              to="/perfil"
-              onClick={() => setOpen(false)}
-              className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium"
-            >
-              Perfil
-            </Link>
-            <Link
-              to="/faq"
-              onClick={() => setOpen(false)}
-              className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium"
-            >
-              FAQ
-            </Link>
-            <Link
-              to="/contato"
-              onClick={() => setOpen(false)}
-              className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium"
-            >
-              Contato
-            </Link>
-            <Link
-              to="/integrantes"
-              onClick={() => setOpen(false)}
-              className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium"
-            >
-              Integrantes
-            </Link>
+            <Link to="/" onClick={() => setOpen(false)} className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium">Início</Link>
+            <Link to="/catalogo" onClick={() => setOpen(false)} className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium">Catálogo</Link>
+            <Link to="/recomendacoes" onClick={() => setOpen(false)} className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium">Recomendações</Link>
+            <Link to="/trilha" onClick={() => setOpen(false)} className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium">Minha Trilha</Link>
+            <Link to="/faq" onClick={() => setOpen(false)} className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium">FAQ</Link>
+            <Link to="/contato" onClick={() => setOpen(false)} className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium">Contato</Link>
+            <Link to="/integrantes" onClick={() => setOpen(false)} className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium">Integrantes</Link>
+
+            {/* PERFIL AGORA É O ÚLTIMO */}
+            <Link to="/perfil" onClick={() => setOpen(false)} className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium">Perfil</Link>
           </nav>
 
           {/* LOGIN MOBILE */}

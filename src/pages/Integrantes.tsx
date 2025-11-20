@@ -32,7 +32,7 @@ export function Integrantes() {
     <main
       className="font-sans min-h-screen px-6 py-16"
       style={{
-        background: `linear-gradient(to bottom, #f8fcff, #ffffff)`,
+        background: "linear-gradient(to bottom, #f8fcff, #ffffff)",
       }}
     >
       <section className="max-w-6xl mx-auto">
@@ -58,8 +58,9 @@ export function Integrantes() {
           </h1>
 
           <p className="mt-3 text-slate-600 max-w-2xl mx-auto">
-            Estudantes FIAP apaixonados por tecnologia, inovação e desenvolvimento
-            de soluções inteligentes para impulsionar pessoas e negócios.
+            Estudantes FIAP apaixonados por tecnologia, inovação e
+            desenvolvimento de soluções inteligentes para impulsionar pessoas e
+            negócios.
           </p>
         </div>
 
@@ -70,15 +71,14 @@ export function Integrantes() {
               key={aluno.nome}
               className="p-7 rounded-2xl border shadow-sm text-center transition-all hover:-translate-y-1 hover:shadow-xl backdrop-blur"
               style={{
-                background: "rgba(255,255,255,0.85)",
+                background: "rgba(255,255,255,0.9)",
                 borderColor: "#e5e7eb",
               }}
             >
               <img
                 src={aluno.img}
                 alt={aluno.nome}
-                className="w-28 h-28 mx-auto rounded-full object-cover mb-6 ring-4 shadow-lg"
-                style={{ ringColor: `${PRIMARY}40` }}
+                className="w-24 h-24 md:w-28 md:h-28 mx-auto rounded-full object-cover mb-6 ring-4 ring-[#0EA5E9]/40 shadow-lg"
               />
 
               <h3 className="text-lg font-extrabold text-slate-900">
@@ -106,7 +106,7 @@ export function Integrantes() {
                   href={aluno.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-xl transition border shadow-sm hover:bg-slate-100"
+                  className="inline-flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-xl transition border shadow-sm hover:bg-slate-100 text-slate-700"
                 >
                   <Github size={16} /> GitHub
                 </a>
