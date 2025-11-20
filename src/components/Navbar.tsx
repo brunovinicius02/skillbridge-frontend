@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 
-/* Cores da sua marca */
 const PRIMARY = "#0EA5E9";
 const PRIMARY_DARK = "#0369A1";
 
-/* Ícones simples */
 const IconMenu = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" width="20" height="20" {...props}>
     <path
-      d="M3 6h18M3 12h18M3 18h18"
+      d="M4 7h16M4 12h16M4 17h16"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
@@ -51,10 +49,16 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   const linkBase =
-    "relative px-3 py-2 text-sm font-medium rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-50/80";
+    "relative px-3 py-2 text-xs md:text-sm font-medium rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100";
   const linkActive = "text-slate-900 font-semibold bg-slate-100 shadow-sm";
 
-  const NavItem = ({ to, children }: { to: string; children: React.ReactNode }) => (
+  const NavItem = ({
+    to,
+    children,
+  }: {
+    to: string;
+    children: React.ReactNode;
+  }) => (
     <NavLink
       to={to}
       className={({ isActive }) =>
@@ -64,7 +68,7 @@ export default function Navbar() {
       <span className="relative inline-flex items-center gap-1">
         {children}
         <span
-          className="pointer-events-none absolute -bottom-1 left-0 h-2px w-0 rounded-full transition-all group-hover:w-full"
+          className="pointer-events-none absolute -bottom-0.5 left-0 h-0.5 w-0 rounded-full transition-all group-hover:w-full"
           style={{
             background: `linear-gradient(90deg, ${PRIMARY}, ${PRIMARY_DARK})`,
           }}
@@ -74,8 +78,8 @@ export default function Navbar() {
   );
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur-xl shadow-[0_10px_30px_rgba(15,23,42,0.06)]">
-      {/* Barra superior da marca */}
+    <header className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+      {/* Linha fina de cor da marca */}
       <div
         className="h-[3px] w-full"
         style={{
@@ -83,21 +87,17 @@ export default function Navbar() {
         }}
       />
 
-      {/* Conteúdo */}
       <div className="mx-auto max-w-7xl px-4 h-16 flex items-center justify-between gap-4">
-        {/* Logo + Nome */}
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="relative flex items-center">
-            <div className="absolute -inset-1 rounded-2xl bg-sky-100/60 blur-md opacity-0 group-hover:opacity-100 transition" />
-            <img
-              src="/logo.png"
-              alt="SkillBridge"
-              className="relative h-14 w-auto transition group-hover:scale-[1.04]"
-            />
-          </div>
+        {/* LOGO + NOME */}
+        <Link to="/" className="flex items-center gap-2 group">
+          <img
+            src="/logo.png"
+            alt="SkillBridge"
+            className="h-8 w-auto md:h-9 transition group-hover:scale-[1.03]"
+          />
 
           <div className="flex flex-col leading-tight">
-            <span className="text-2xl font-semibold tracking-tight text-slate-900 group-hover:text-slate-950">
+            <span className="text-base md:text-lg font-semibold tracking-tight text-slate-900">
               Skill
               <span
                 className="bg-clip-text text-transparent"
@@ -108,115 +108,143 @@ export default function Navbar() {
                 Bridge
               </span>
             </span>
-            <span className="text-[11px] uppercase tracking-[0.22em] text-slate-400">
+            <span className="text-[9px] md:text-[10px] uppercase tracking-[0.22em] text-slate-400">
               Seu próximo passo, guiado por IA
             </span>
           </div>
         </Link>
 
-        {/* Navegação desktop */}
-        <nav className="hidden md:flex items-center gap-1 rounded-full bg-white/80 px-3 py-1.5 border border-slate-200/80 shadow-sm">
+        {/* NAV DESKTOP */}
+        <nav className="hidden md:flex items-center gap-1 rounded-full bg-slate-50 px-3 py-1.5 border border-slate-200">
           <NavItem to="/">Início</NavItem>
           <NavItem to="/catalogo">Catálogo</NavItem>
           <NavItem to="/recomendacoes">Recomendações</NavItem>
           <NavItem to="/trilha">Minha Trilha</NavItem>
           <NavItem to="/perfil">Perfil</NavItem>
+          <NavItem to="/faq">FAQ</NavItem>
+          <NavItem to="/contato">Contato</NavItem>
+          <NavItem to="/integrantes">Integrantes</NavItem>
         </nav>
 
-        {/* Botão Login */}
+        {/* LOGIN DESKTOP */}
         <Link
           to="/login"
-          className="hidden md:inline-flex items-center gap-2 px-5 py-2 text-sm font-semibold rounded-xl text-white shadow-md hover:shadow-lg hover:-translate-y-px active:translate-y-0 transition"
+          className="hidden md:inline-flex items-center gap-2 px-4 py-2 text-xs md:text-sm font-semibold rounded-xl text-white shadow-md hover:shadow-lg hover:-translate-y-px active:translate-y-0 transition"
           style={{
             background: `linear-gradient(120deg, ${PRIMARY}, ${PRIMARY_DARK})`,
-            boxShadow: "0 10px 25px rgba(14,165,233,0.35)",
           }}
         >
+          <IconLogin />
           <span>Entrar</span>
-          <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/15">
-            <IconLogin />
-          </span>
         </Link>
 
-        {/* Botão mobile */}
+        {/* BOTÃO MOBILE */}
         <button
-          className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-300/80 bg-white/70 hover:bg-slate-50 active:scale-95 transition"
+          className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-white active:scale-95 transition text-slate-700"
           onClick={() => setOpen(true)}
         >
           <IconMenu />
         </button>
       </div>
 
-      {/* Drawer mobile */}
+      {/* MENU MOBILE – TELA INTEIRA BRANCA */}
       {open && (
-        <div
-          className="md:hidden fixed inset-0 z-60 bg-black/40 backdrop-blur-sm"
-          onClick={() => setOpen(false)}
-        >
-          <div
-            className="absolute right-0 top-0 h-full w-[78%] max-w-xs bg-white shadow-2xl border-l border-slate-200 flex flex-col"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Cabeçalho drawer */}
-            <div className="px-4 pt-4 pb-3 flex items-center justify-between border-b border-slate-100">
-              <div className="flex items-center gap-3">
-                <img src="/logo.png" alt="SkillBridge" className="h-10 w-auto" />
-                <div className="flex flex-col leading-tight">
-                  <span className="text-base font-semibold text-slate-900">
-                    SkillBridge
-                  </span>
-                  <span className="text-[11px] text-slate-400">
-                    Explore novas habilidades
-                  </span>
-                </div>
+        <div className="fixed inset-0 z-50 bg-white flex flex-col md:hidden">
+          {/* topo do menu mobile */}
+          <div className="px-4 pt-4 pb-3 flex items-center justify-between border-b border-slate-200">
+            <div className="flex items-center gap-2">
+              <img src="/logo.png" alt="SkillBridge" className="h-7 w-auto" />
+              <div className="flex flex-col leading-tight">
+                <span className="text-sm font-semibold text-slate-900">
+                  SkillBridge
+                </span>
+                <span className="text-[10px] text-slate-400">
+                  Explore novas habilidades
+                </span>
               </div>
-
-              <button
-                className="h-9 w-9 inline-flex items-center justify-center rounded-xl hover:bg-slate-100"
-                onClick={() => setOpen(false)}
-              >
-                <IconX />
-              </button>
             </div>
 
-            {/* Links */}
-            <nav className="px-3 py-4 flex flex-col gap-1 text-sm">
-              <Link to="/" onClick={() => setOpen(false)} className={linkBase}>
-                Início
-              </Link>
-              <Link to="/catalogo" onClick={() => setOpen(false)} className={linkBase}>
-                Catálogo
-              </Link>
-              <Link
-                to="/recomendacoes"
-                onClick={() => setOpen(false)}
-                className={linkBase}
-              >
-                Recomendações
-              </Link>
-              <Link to="/trilha" onClick={() => setOpen(false)} className={linkBase}>
-                Minha Trilha
-              </Link>
-              <Link to="/perfil" onClick={() => setOpen(false)} className={linkBase}>
-                Perfil
-              </Link>
-            </nav>
+            <button
+              className="h-9 w-9 inline-flex items-center justify-center rounded-xl hover:bg-slate-100 active:scale-95 transition"
+              onClick={() => setOpen(false)}
+            >
+              <IconX />
+            </button>
+          </div>
 
-            {/* Login no Mobile */}
-            <div className="mt-auto px-4 pb-5 pt-2 border-t border-slate-100 bg-slate-50/60">
-              <Link
-                to="/login"
-                onClick={() => setOpen(false)}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm text-white shadow-md active:scale-[0.99] transition"
-                style={{
-                  background: `linear-gradient(120deg, ${PRIMARY}, ${PRIMARY_DARK})`,
-                  boxShadow: "0 10px 25px rgba(14,165,233,0.35)",
-                }}
-              >
-                <IconLogin />
-                <span>Entrar na plataforma</span>
-              </Link>
-            </div>
+          {/* LINKS MOBILE */}
+          <nav className="px-4 py-4 flex flex-col gap-2 text-sm">
+            <Link
+              to="/"
+              onClick={() => setOpen(false)}
+              className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium"
+            >
+              Início
+            </Link>
+            <Link
+              to="/catalogo"
+              onClick={() => setOpen(false)}
+              className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium"
+            >
+              Catálogo
+            </Link>
+            <Link
+              to="/recomendacoes"
+              onClick={() => setOpen(false)}
+              className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium"
+            >
+              Recomendações
+            </Link>
+            <Link
+              to="/trilha"
+              onClick={() => setOpen(false)}
+              className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium"
+            >
+              Minha Trilha
+            </Link>
+            <Link
+              to="/perfil"
+              onClick={() => setOpen(false)}
+              className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium"
+            >
+              Perfil
+            </Link>
+            <Link
+              to="/faq"
+              onClick={() => setOpen(false)}
+              className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium"
+            >
+              FAQ
+            </Link>
+            <Link
+              to="/contato"
+              onClick={() => setOpen(false)}
+              className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium"
+            >
+              Contato
+            </Link>
+            <Link
+              to="/integrantes"
+              onClick={() => setOpen(false)}
+              className="px-3 py-2 rounded-xl text-slate-700 hover:bg-slate-100 font-medium"
+            >
+              Integrantes
+            </Link>
+          </nav>
+
+          {/* LOGIN MOBILE */}
+          <div className="mt-auto px-4 pb-6 pt-2 border-t border-slate-200">
+            <Link
+              to="/login"
+              onClick={() => setOpen(false)}
+              className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm text-white shadow-md active:scale-[0.99] transition"
+              style={{
+                background: `linear-gradient(120deg, ${PRIMARY}, ${PRIMARY_DARK})`,
+              }}
+            >
+              <IconLogin />
+              <span>Entrar na plataforma</span>
+            </Link>
           </div>
         </div>
       )}

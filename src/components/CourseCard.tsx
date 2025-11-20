@@ -4,19 +4,37 @@ import type { Curso } from "../types";
 import { useTrilha } from "../hooks/useTrilha";
 import { useFavoritos } from "../hooks/useFavoritos";
 
-
 type Props = {
   c: Curso;
+  // controle opcional vindo do pai
+  jaNaTrilhaExternamente?: boolean;
+  onAdicionarTrilhaClick?: (curso: Curso) => void;
 };
 
-export default function CourseCard({ c }: Props) {
+export default function CourseCard({
+  c,
+  jaNaTrilhaExternamente,
+  onAdicionarTrilhaClick,
+}: Props) {
   const { adicionar } = useTrilha();
   const { toggleFavorito, isFavorito } = useFavoritos();
 
   const favorito = isFavorito(c.id);
 
+  // estado local só como fallback, se o pai não controlar
+  const [jaNaTrilhaLocal, setJaNaTrilhaLocal] = useState(false);
+
+  const jaNaTrilha = jaNaTrilhaExternamente ?? jaNaTrilhaLocal;
+
   const handleAdicionarTrilha = () => {
-    adicionar(c);
+    if (jaNaTrilha) return;
+
+    if (onAdicionarTrilhaClick) {
+      onAdicionarTrilhaClick(c); // pai cuida
+    } else {
+      adicionar(c); // fallback: add direto aqui
+      setJaNaTrilhaLocal(true);
+    }
   };
 
   return (
@@ -27,7 +45,7 @@ export default function CourseCard({ c }: Props) {
         rounded-2xl border border-slate-100
         p-4 bg-white
         shadow-sm hover:shadow-md hover:-translate-y-1
-        transition group
+        transition
       "
     >
       {/* Coração de favoritos */}
@@ -82,56 +100,23 @@ export default function CourseCard({ c }: Props) {
       </div>
 
       {/* Ações */}
-      <div className="mt-4 flex gap-2 relative">
-
-        {/* BOTÃO */}
-        <button
-          type="button"
-          className="
-            flex-1 rounded-xl border border-slate-200
-            px-3 py-2 text-xs md:text-sm font-medium relative
-            text-slate-700 hover:bg-slate-50 transition
-          "
-        >
-          Ver detalhes
-        </button>
-
-        {/* TOOLTIP */}
-        <div
-          className="
-            absolute left-1/2 bottom-[52px]
-            -translate-x-1/2 -translate-y-2
-            hidden group-hover:block
-            w-64 z-30
-            rounded-lg border border-slate-700
-            bg-slate-900/95 px-3 py-2
-            text-[11px] leading-snug shadow-xl text-slate-100
-          "
-        >
-          <p className="font-semibold mb-1 text-sky-300">{c.titulo}</p>
-
-          <p>
-            {c.descricao
-              ? c.descricao.length > 150
-                ? c.descricao.slice(0, 150) + "..."
-                : c.descricao
-              : "Descrição não disponível."}
-          </p>
-        </div>
-
-        {/* BOTÃO ADICIONAR */}
+      <div className="mt-4">
         <button
           type="button"
           onClick={handleAdicionarTrilha}
-          className="
-            flex-1 rounded-xl px-3 py-2 text-xs md:text-sm font-semibold
-            text-white shadow-sm bg-sky-600 hover:bg-sky-700
-            transition
-          "
+          disabled={jaNaTrilha}
+          className={`
+            w-full rounded-xl px-3 py-2 text-xs md:text-sm font-semibold
+            text-white shadow-sm transition
+            ${
+              jaNaTrilha
+                ? "bg-emerald-600/90 cursor-default"
+                : "bg-sky-600 hover:bg-sky-700"
+            }
+          `}
         >
-          Adicionar à trilha
+          {jaNaTrilha ? "Já na sua trilha ✅" : "Adicionar à trilha"}
         </button>
-
       </div>
     </div>
   );
