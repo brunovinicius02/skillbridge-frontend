@@ -9,7 +9,7 @@ import { Perfil } from "./pages/Perfil";
 import { Recomendacoes } from "./pages/Recomendacoes";
 import { Trilha } from "./pages/Trilha";
 import { Integrantes } from "./pages/Integrantes";
-import { FAQ } from "./pages/FAQ";
+import { Faq } from "./pages/FAQ";
 import {Contato} from "./pages/Contato";
 
 import { FavoritosProvider } from "./hooks/useFavoritos";
@@ -31,7 +31,7 @@ export default function App() {
                 <Route path="/recomendacoes" element={<Recomendacoes />} />
                 <Route path="/trilha" element={<Trilha />} />
                 <Route path="/integrantes" element={<Integrantes />} />
-                <Route path="/faq" element={<FAQ />} />
+                <Route path="/faq" element={<Faq />} />
                 <Route path="/contato" element={<Contato />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
