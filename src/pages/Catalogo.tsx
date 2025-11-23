@@ -48,7 +48,7 @@ export function Catalogo() {
 
       try {
         const inscricoes = await inscricaoService.listarPorUsuario(usuario.id);
-        const idsInscritos = new Set(inscricoes.map(i => i.cursoId));
+        const idsInscritos = new Set(inscricoes.map(i => i.curso.id));
         setCursosInscritos(idsInscritos);
       } catch (err) {
         console.error('Erro ao carregar inscrições:', err);
@@ -64,7 +64,7 @@ export function Catalogo() {
     
     try {
       const inscricoes = await inscricaoService.listarPorUsuario(usuario.id);
-      const idsInscritos = new Set(inscricoes.map(i => i.cursoId));
+      const idsInscritos = new Set(inscricoes.map(i => i.curso.id));
       setCursosInscritos(idsInscritos);
     } catch (err) {
       console.error('Erro ao recarregar inscrições:', err);

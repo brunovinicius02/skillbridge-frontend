@@ -78,7 +78,15 @@ export default function CourseCard({ c, jaNaTrilha = false, onAdicionadoATrilha 
       {/* Coração de favoritos */}
       <button
         type="button"
-        onClick={() => toggleFavorito({ id: c.id, titulo: c.nome, provedor: c.area, cargaHoraria: c.cargaHoraria, nivel: c.nivel, tags: [], rating: 4.5 })}
+        onClick={() => toggleFavorito({ 
+          id: c.id, 
+          titulo: c.nome, 
+          provedor: c.area, 
+          cargaHoraria: c.cargaHoraria, 
+          nivel: c.nivel.toLowerCase() as 'iniciante' | 'intermediario' | 'avancado', 
+          tags: [], 
+          rating: 4.5 
+        })}
         className="
           absolute right-3 top-3
           inline-flex h-8 w-8 items-center justify-center

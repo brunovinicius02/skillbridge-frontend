@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
 
 interface CursoRecomendado {
+  id?: number;
   idCurso?: number;
   id_curso?: number;
   nome: string;
@@ -50,7 +51,7 @@ export function Recomendacoes() {
     try {
       const response = await axios.get(`http://localhost:8080/api/inscricoes/usuario/${usuarioId}`);
       const inscricoes = response.data;
-      const cursosIds = new Set(inscricoes.map((i: any) => i.curso.id));
+      const cursosIds = new Set<number>(inscricoes.map((i: any) => i.curso.id));
       setCursosInscritos(cursosIds);
     } catch (err) {
       console.error('Erro ao carregar inscrições:', err);

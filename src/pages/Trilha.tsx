@@ -79,7 +79,7 @@ export function Trilha() {
     );
   }
 
-  const cargaTotal = inscricoes.reduce((acc, i) => acc + (i.curso?.cargaHoraria || 0), 0);
+  const cargaTotal = inscricoes.reduce((acc, i) => acc + i.tempoGastoHoras, 0);
 
   return (
     <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-10 pb-16">
@@ -136,7 +136,6 @@ export function Trilha() {
             if (!curso) return null;
 
             const cargaHoraria = inscricao.tempoGastoHoras || 0;
-            const semanas = Math.max(1, Math.ceil(cargaHoraria / 5));
             const dataInscricao = new Date(inscricao.dataInscricao).toLocaleDateString('pt-BR');
 
             return (
@@ -154,9 +153,6 @@ export function Trilha() {
                     <h3 className="text-base md:text-lg font-semibold text-slate-900">
                       {curso.nome}
                     </h3>
-                    <span className="inline-flex items-center rounded-full bg-sky-50 px-2.5 py-1 text-[11px] font-medium text-sky-700 border border-sky-100">
-                      Nível: {curso.nivel || 'Não definido'}
-                    </span>
                     {inscricao.status === 'EM_ANDAMENTO' && (
                       <span className="inline-flex items-center rounded-full bg-green-50 px-2.5 py-1 text-[11px] font-medium text-green-700 border border-green-100">
                         Em andamento
