@@ -85,7 +85,9 @@ export default function CourseCard({ c, jaNaTrilha = false, onAdicionadoATrilha 
           cargaHoraria: c.cargaHoraria, 
           nivel: c.nivel.toLowerCase() as 'iniciante' | 'intermediario' | 'avancado', 
           tags: [], 
-          rating: 4.5 
+          rating: 4.5,
+          descricao: c.descricao || '',
+          youtubeUrl: c.urlExterno || ''
         })}
         className="
           absolute right-3 top-3
