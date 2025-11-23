@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Sparkles, TrendingUp, Clock, Star } from 'lucide-react';
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
+import { API_BASE_URL } from '../config/api.config';
 
 interface CursoRecomendado {
   id?: number;
@@ -49,7 +50,7 @@ export function Recomendacoes() {
   // Carregar inscrições do usuário
   const carregarInscricoes = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/inscricoes/usuario/${usuarioId}`);
+      const response = await axios.get(`${API_BASE_URL}/inscricoes/usuario/${usuarioId}`);
       const inscricoes = response.data;
       const cursosIds = new Set<number>(inscricoes.map((i: any) => i.curso.id));
       setCursosInscritos(cursosIds);
@@ -66,7 +67,7 @@ export function Recomendacoes() {
       console.log('🔍 Buscando recomendações para usuário:', usuarioId);
       
       const response = await axios.post(
-        `http://localhost:8080/api/recomendacoes/gerar/${usuarioId}?topN=10`
+        `${API_BASE_URL}/recomendacoes/gerar/${usuarioId}?topN=10`
       );
       
       console.log('✅ Resposta da API:', response.data);
@@ -92,7 +93,7 @@ export function Recomendacoes() {
       console.log('📤 Adicionando curso à trilha:', cursoId);
       
       // Criar inscrição
-      await axios.post('http://localhost:8080/api/inscricoes', {
+      await axios.post(`${API_BASE_URL}/inscricoes`, {
         usuarioId: usuarioId,
         cursoId: cursoId
       });
